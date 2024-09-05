@@ -10,7 +10,7 @@ the following folders are located in this repository:
 ## 📩  downloading
 1. install **Adafruit GFX** and **Adafruit SSD1306** libraries
 2. compile and upload **esp32.ino** file to your board
-3. from **wespdisplay** folder run
+3. from **wespdisp** folder run
 ```sh
 pip install .
 ```
