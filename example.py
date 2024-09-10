@@ -1,7 +1,7 @@
 from wespdisp import wDisplay
 import time
 
-d = wDisplay("192.168.0.106", port=80, debug=True)
+d = wDisplay("192.168.0.109", port=80, debug=True)
 d.setup(x=0, y=0, size=1) # checking display availability, clearing display, setting font size and text position
 d.println("test") # printing something
 d.setCursor(0, 16) # setting cursor position
