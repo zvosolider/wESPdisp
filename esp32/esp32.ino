@@ -69,7 +69,7 @@ void setup()
   server.on("/clear", clear);
   server.on("/setCursor", setCursor);
   server.on("/setSize", setSize);
-  server.on("/update", update)
+  server.on("/update", update);
   server.on("/", ind);
   server.begin();
 }
