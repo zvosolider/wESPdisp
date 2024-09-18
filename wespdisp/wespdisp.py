@@ -65,3 +65,8 @@ class wDisplay:
             if size: self.setSize(size)
             if x and y: self.setCursor(x, y)
             self.println(tx)
+    
+    def update(self):
+        req = requests.post(url=f"{self.url}/update")
+        if self.debug and req.status_code == 200:
+            print("updated")

@@ -25,6 +25,7 @@ void println();
 void print();
 void setCursor();
 void setSize();
+void update();
 
 void setup()
 {
@@ -68,6 +69,7 @@ void setup()
   server.on("/clear", clear);
   server.on("/setCursor", setCursor);
   server.on("/setSize", setSize);
+  server.on("/update", update)
   server.on("/", ind);
   server.begin();
 }
@@ -82,7 +84,6 @@ void ind() {
 void clear() {
   if (server.method() == HTTP_POST) {
     display.clearDisplay();
-    display.display();
     server.send(200, "text/plain", "OK");
   } else {
     server.send(404, "text/plain", "404");
@@ -94,7 +95,6 @@ void println() {
     if (server.hasArg("text")) {
       String text = server.arg("text");
       display.println(text);
-      display.display();
       server.send(200, "text/plain", "OK");
     } else {
       server.send(404, "text/plain", "404");
@@ -109,7 +109,6 @@ void print() {
     if (server.hasArg("text")) {
       String text = server.arg("text");
       display.print(text);
-      display.display();
       server.send(200, "text/plain", "OK");
     } else {
       server.send(404, "text/plain", "404");
@@ -126,7 +125,6 @@ void setCursor() {
       x = server.arg("x").toInt();
       y = server.arg("y").toInt();
       display.setCursor(x, y);
-      display.display();
       server.send(200, "text/plain", "OK");
     } else {
       server.send(404, "text/plain", "404");
@@ -141,11 +139,19 @@ void setSize() {
     if (server.hasArg("size")) {
       int size = server.arg("size").toInt();
       display.setTextSize(size);
-      display.display();
       server.send(200, "text/plain", "OK");
     } else {
       server.send(404, "text/plain", "404");
     }
+  } else {
+    server.send(404, "text/plain", "404");
+  }
+}
+
+void update() {
+  if (server.method() == HTTP_POST) {
+    display.display();
+    server.send(200, "text/plain", "OK");
   } else {
     server.send(404, "text/plain", "404");
   }
