@@ -66,6 +66,12 @@ class wDisplay:
             if x and y: self.setCursor(x, y)
             self.println(tx)
     
+    def drawPixel(self, x:int=0, y:int=0):
+        data = { "x": str(x), "y": str(y) }
+        req = requests.post(url=f"{self.url}/drawPixel", data=data)
+        if self.debug and req.status_code == 200:
+            print(f"drawed pixel at {x},{y}")
+
     def update(self):
         req = requests.post(url=f"{self.url}/update")
         if self.debug and req.status_code == 200:

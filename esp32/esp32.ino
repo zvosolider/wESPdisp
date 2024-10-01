@@ -10,8 +10,8 @@
 
 #define OLED_RESET -1
 
-const char* ssid = ""; // !!! SET UP THIS BEFORE COMPILING !!!
-const char* pass = "";
+const char* ssid = "ALEX"; // !!! SET UP THIS BEFORE COMPILING !!!
+const char* pass = "magadan73";
 
 String ip = "";
 
@@ -26,6 +26,7 @@ void print();
 void setCursor();
 void setSize();
 void update();
+void drawPixel();
 
 void setup()
 {
@@ -70,9 +71,11 @@ void setup()
   server.on("/setCursor", setCursor);
   server.on("/setSize", setSize);
   server.on("/update", update);
+  server.on("/drawPixel", drawPixel);
   server.on("/", ind);
   server.begin();
 }
+
 void loop() {
   server.handleClient();
 }
@@ -152,6 +155,22 @@ void update() {
   if (server.method() == HTTP_POST) {
     display.display();
     server.send(200, "text/plain", "OK");
+  } else {
+    server.send(404, "text/plain", "404");
+  }
+}
+
+void drawPixel() {
+  if (server.method() == HTTP_POST) {
+    if (server.hasArg("x") && server.hasArg("y")) {
+      int x, y;
+      x = server.arg("x").toInt();
+      y = server.arg("y").toInt();
+      display.drawPixel(x, y, SSD1306_WHITE);
+      server.send(200, "text/plain", "OK");
+    } else {
+      server.send(404, "text/plain", "404");
+    }
   } else {
     server.send(404, "text/plain", "404");
   }
