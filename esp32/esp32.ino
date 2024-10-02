@@ -10,8 +10,8 @@
 
 #define OLED_RESET -1
 
-const char* ssid = "ALEX"; // !!! SET UP THIS BEFORE COMPILING !!!
-const char* pass = "magadan73";
+const char* ssid = ""; // !!! SET UP THIS BEFORE COMPILING !!!
+const char* pass = "";
 
 String ip = "";
 uint16_t curColor = SSD1306_WHITE;
